@@ -1,0 +1,15 @@
+CREATE DATABASE [TesteDev];
+
+CREATE TABLE [Cliente] (
+    [Id] int NOT NULL IDENTITY,
+    [CPF] nvarchar(max) NULL,
+    [Nome] nvarchar(max) NULL,
+    [DataNascimento] datetime2 NULL,
+    [sexo] int NULL,
+    [Endereco] nvarchar(max) NULL,
+    [Estado] nvarchar(max) NULL,
+    [Cidade] nvarchar(max) NULL,
+    [DataInserido] datetime2 NULL,
+    [DataExcluido] datetime2 NULL,
+    CONSTRAINT [PK_Cliente] PRIMARY KEY ([Id])
+);

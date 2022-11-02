@@ -1,0 +1,144 @@
+﻿@model IPagedList<Cliente>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+
+@{
+    ViewData["Title"] = "Cadastro de Clientes";
+}
+
+<div class="card mb-4 box-shadow">
+    <div style="padding:10px">
+        <h4>Pesquisar Cliente</h4>
+    </div>
+    <div>
+        <form asp-controller="Clientes" asp-action="Index" method="get">
+            <div class="form-group" style="padding:10px">
+                <div>
+                    CPF: <input type="text" name="cpf" />
+                    Nome: <input type="text" name="nome" />
+                    Data Nascimento: <input type="date" name="datanasc" />
+                    Sexo:
+                    <select name="sexo">
+                        <option value="">Sexo</option>
+                        <option value="1">M</option>
+                        <option value="2">F</option>
+                    </select>
+                </div>
+                <div>
+                    Endereço: <input type="text" name="end" />
+                    Estado: 
+                    <select name="uf">
+                        <option value="">Estado</option>
+                        <option value="AC">AC</option>
+                        <option value="AL">AL</option>
+                        <option value="AP">AP</option>
+                        <option value="AM">AM</option>
+                        <option value="BA">BA</option>
+                        <option value="CE">CE</option>
+                        <option value="DF">DF</option>
+                        <option value="ES">ES</option>
+                        <option value="GO">GO</option>
+                        <option value="MA">MA</option>
+                        <option value="MT">MT</option>
+                        <option value="MS">MS</option>
+                        <option value="MG">MG</option>
+                        <option value="PA">PA</option>
+                        <option value="PB">PB</option>
+                        <option value="PR">PR</option>
+                        <option value="PE">PE</option>
+                        <option value="PI">PI</option>
+                        <option value="RJ">RJ</option>
+                        <option value="RN">RN</option>
+                        <option value="RS">RS</option>
+                        <option value="RO">RO</option>
+                        <option value="RR">RR</option>
+                        <option value="SC">SC</option>
+                        <option value="SP">SP</option>
+                        <option value="SE">SE</option>
+                        <option value="TO">TO</option>
+                    </select>
+                    Cidade: <input type="text" name="cid" />
+
+                    <input class="btn btn-primary" type="submit" value="Pesquisar" />
+                    <a class="btn btn-secondary" asp-action="Index">Limpar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary" style="align:right">Cadastrar Cliente</a>
+</p>
+
+<div class="card mb-4 box-shadow" style="padding:10px">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().CPF)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().DataNascimento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Estado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Cidade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().sexo)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CPF)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataNascimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cidade)
+                </td>
+                <td>
+                    @if (item.sexo == 1)
+                    {
+                        <p>M</p>
+                    }
+                    else
+                    {
+                        <p>F</p>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

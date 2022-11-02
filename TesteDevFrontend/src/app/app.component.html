@@ -1,0 +1,55 @@
+<button (click)="initNewCliente()">Cadastrar Cliente</button>
+
+<div class="card mb-4 box-shadow" style="padding:10px">
+  <table class="table">
+      <thead>
+          <tr>
+              <th>Cliente</th>
+              <th>CPF</th>
+              <th>Data Nascimento</th>
+              <th>Estado</th>
+              <th>Cidade</th>
+              <th>sexo</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: 5, currentPage: page }">
+              <td>
+                {{cliente.nome}}
+              </td>
+              <td>
+                {{cliente.cpf}}
+              </td>
+              <td>
+                {{cliente.dataNascimento}}
+              </td>
+              <td>
+                {{cliente.estado}}
+              </td>
+              <td>
+                {{cliente.cidade}}
+              </td>
+              <td>
+                  <p *ngIf="cliente.sexo == 1">M</p>
+                  <p *ngIf="cliente.sexo == 2">F</p>
+              </td>
+              <td>
+                  <button (click)="editCliente(cliente)">Editar</button>
+                  <button (click)="deleteCliente(cliente)">Deletar</button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+<div class="has-text-centered">
+  <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="page = $event"></pagination-controls>
+</div>
+
+<app-edit-client 
+  [cliente]="clienteEditar" 
+  (clienteCreated)="clienteCreatedRefresh($event)"
+  (clienteDeleted)="clienteDeletedRefresh($event)"
+  (closeEditScreenEmited)="closeEditScreenEvent()"
+></app-edit-client>

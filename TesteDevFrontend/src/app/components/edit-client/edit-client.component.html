@@ -1,0 +1,151 @@
+<div class="row" *ngIf="cliente">
+    <h2>{{ cliente.nome }}</h2>
+    <div class="col-md-4">
+        <form>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Nome</mat-label>
+                <input matInput [(ngModel)]="cliente.nome" name="Nome">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>CPF</mat-label>
+                <input matInput [(ngModel)]="cliente.cpf" name="Cpf">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Data Nascimento</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="cliente.dataNascimento" name="datanasc">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+            <mat-label>Sexo</mat-label>
+            <mat-select [(ngModel)]="cliente.sexo" name="sexo" (ngModelChange)="cliente.sexo = $event ? $event : null">
+                <mat-option [value]="">Sexo</mat-option>
+                <mat-option [value]="1">M</mat-option>
+                <mat-option [value]="2">F</mat-option>
+            </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Endereço</mat-label>
+                <input matInput [(ngModel)]="cliente.endereco" name="end">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Estado</mat-label>
+                <mat-select [(ngModel)]="cliente.estado" name="uf" (ngModelChange)="cliente.estado = $event ? $event : null">
+                    <mat-option [value]="">Estado</mat-option>
+                    <mat-option [value]="'AC'">AC</mat-option>
+                    <mat-option [value]="'AL'">AL</mat-option>
+                    <mat-option [value]="'AP'">AP</mat-option>
+                    <mat-option [value]="'AM'">AM</mat-option>
+                    <mat-option [value]="'BA'">BA</mat-option>
+                    <mat-option [value]="'CE'">CE</mat-option>
+                    <mat-option [value]="'DF'">DF</mat-option>
+                    <mat-option [value]="'ES'">ES</mat-option>
+                    <mat-option [value]="'GO'">GO</mat-option>
+                    <mat-option [value]="'MA'">MA</mat-option>
+                    <mat-option [value]="'MT'">MT</mat-option>
+                    <mat-option [value]="'MS'">MS</mat-option>
+                    <mat-option [value]="'MG'">MG</mat-option>
+                    <mat-option [value]="'PA'">PA</mat-option>
+                    <mat-option [value]="'PB'">PB</mat-option>
+                    <mat-option [value]="'PR'">PR</mat-option>
+                    <mat-option [value]="'PE'">PE</mat-option>
+                    <mat-option [value]="'PI'">PI</mat-option>
+                    <mat-option [value]="'RJ'">RJ</mat-option>
+                    <mat-option [value]="'RN'">RN</mat-option>
+                    <mat-option [value]="'RS'">RS</mat-option>
+                    <mat-option [value]="'RO'">RO</mat-option>
+                    <mat-option [value]="'RR'">RR</mat-option>
+                    <mat-option [value]="'SC'">SC</mat-option>
+                    <mat-option [value]="'SP'">SP</mat-option>
+                    <mat-option [value]="'SE'">SE</mat-option>
+                    <mat-option [value]="'TO'">TO</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Cidade</mat-label>
+                <input matInput [(ngModel)]="cliente.cidade" name="cid">
+            </mat-form-field>
+
+            <!-- <div class="form-group">
+                <label class="control-label">Nome:</label>
+                <input class="form-control" [(ngModel)]="cliente.nome" placeholder="Nome" name="Nome"/>
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">CPF:</label>
+                <input  class="form-control" [(ngModel)]="cliente.cpf" placeholder="CPF" name="cpf"/>
+                <span asp-validation-for="CPF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Data Nascimento:</label>
+                <input  type="date" class="form-control" [(ngModel)]="cliente.dataNascimento" placeholder="Data Nascimento" name="datansc"/>
+                <span asp-validation-for="DataNascimento" class="text-danger"></span>
+            </div> -->
+            <!-- <div class="form-group">
+                <label  class="control-label">Sexo:</label>
+                <select  class="form-control" [(ngModel)]="cliente.sexo" (ngModelChange)="cliente.sexo = $event ? $event : null" placeholder="Sexo" name="sexo">
+                    <option value="">Sexo</option>
+                    <option value="1">M</option>
+                    <option value="2">F</option>
+                </select>
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Endereço:</label>
+                <input class="form-control" [(ngModel)]="cliente.endereco" placeholder="Endereço" name="end"/>
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Estado:</label>
+                <select class="form-control" [(ngModel)]="cliente.estado" (ngModelChange)="cliente.estado = $event ? $event : null" placeholder="Estado" name="uf">
+                    <option value="">Estado</option>
+                    <option value="AC">AC</option>
+                    <option value="AL">AL</option>
+                    <option value="AP">AP</option>
+                    <option value="AM">AM</option>
+                    <option value="BA">BA</option>
+                    <option value="CE">CE</option>
+                    <option value="DF">DF</option>
+                    <option value="ES">ES</option>
+                    <option value="GO">GO</option>
+                    <option value="MA">MA</option>
+                    <option value="MT">MT</option>
+                    <option value="MS">MS</option>
+                    <option value="MG">MG</option>
+                    <option value="PA">PA</option>
+                    <option value="PB">PB</option>
+                    <option value="PR">PR</option>
+                    <option value="PE">PE</option>
+                    <option value="PI">PI</option>
+                    <option value="RJ">RJ</option>
+                    <option value="RN">RN</option>
+                    <option value="RS">RS</option>
+                    <option value="RO">RO</option>
+                    <option value="RR">RR</option>
+                    <option value="SC">SC</option>
+                    <option value="SP">SP</option>
+                    <option value="SE">SE</option>
+                    <option value="TO">TO</option>
+                </select>
+                <span class="text-danger"></span>
+            </div> -->
+            <!-- <div class="form-group">
+                <label class="control-label">Cidade:</label>
+                <input class="form-control" [(ngModel)]="cliente.cidade" placeholder="Cidade" name="cid"/>
+                <span asp-validation-for="Cidade" class="text-danger"></span>
+            </div> -->
+            <div class="form-group">
+                <button (click)="createCliente(cliente)" *ngIf="!cliente.id">Cadastrar</button>
+                <button (click)="updateCliente(cliente)" *ngIf="cliente.id">Salvar</button>
+                <button (click)="closeEditScreen()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
