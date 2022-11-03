@@ -1,6 +1,6 @@
-# Web App feito com uma API REST C# .NET 6 e AngularJS 14
+# Web App feito com uma API REST C# .NET 6 e Angular 14
 
-Web App para cadastro de clientes feito com .NET 6 e AngularJS, como parte de um processo avaliativo para desenvolvedores .NET C#.
+Web App para cadastro de clientes feito com .NET 6 e Angular 14, como parte de um processo avaliativo para desenvolvedores .NET C#.
 
 A aplicação web permite inserir, alterar, excluir e filtrar clientes.
 
