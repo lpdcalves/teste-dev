@@ -1,3 +1,11 @@
+<p>
+  <mat-toolbar color="primary">
+    <img src="assets/imgs/upd8-logo.png" width="90"/>
+    <span>Teste Dev</span>
+  </mat-toolbar>
+</p>
+
+
 <div class="main-div">
 
   <app-search-client
@@ -64,7 +72,7 @@
 
   <br>
 
-  <app-edit-client 
+  <app-edit-client
     [cliente]="clienteEditar" 
     (clienteCreated)="clienteCreatedRefresh($event)"
     (clienteDeleted)="clienteDeletedRefresh($event)"

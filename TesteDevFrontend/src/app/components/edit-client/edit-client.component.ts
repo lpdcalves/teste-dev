@@ -20,23 +20,25 @@ export class EditClientComponent implements OnInit {
   }
 
   createCliente(cliente:Cliente){
-    //if(cliente.dataNascimento){ cliente.dataNascimento = null}
     this.clienteService
       .createClientes(cliente)
-      .subscribe((clientes) => this.clienteCreated.emit(clientes)) 
+      .subscribe((clientes) => this.clienteCreated.emit(clientes));
+    this.closeEditScreen();
   }
 
   updateCliente(cliente:Cliente){
-    this.clienteService.updateClientes(cliente).subscribe((clientes) => {}) 
+    this.clienteService.updateClientes(cliente).subscribe((clientes) => this.closeEditScreen());
   }
 
   deleteCliente(cliente:Cliente){
     this.clienteService
       .deleteClientes(cliente)
-      .subscribe((clientes) => this.clienteDeleted.emit([cliente])) 
+      .subscribe((clientes) => this.clienteDeleted.emit([cliente]))
+    this.closeEditScreen();
   }
 
   closeEditScreen(){
+    this.cliente = new Cliente();
     this.closeEditScreenEmited.emit();
   }
 

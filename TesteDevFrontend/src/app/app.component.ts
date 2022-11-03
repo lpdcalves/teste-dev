@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Cliente } from './models/cliente';
 import { ClienteService } from './services/cliente.service';
 
@@ -7,7 +7,7 @@ import { ClienteService } from './services/cliente.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent{
+export class AppComponent {
 
   title = 'TesteDevFrontend';
   clientes: Cliente[] = [];
