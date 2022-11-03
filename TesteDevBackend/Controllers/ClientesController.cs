@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TesteDev.Data;
 using TesteDev.Models;
+using TesteDevBackend.Models;
 using X.PagedList;
 
 namespace TesteDev.Controllers
@@ -26,40 +27,42 @@ namespace TesteDev.Controllers
 
         // GET: api/Clientes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cliente>>> GetCliente(string? cpf, string? nome, DateTime? datanasc, int? sexo, string? end, string? uf, string? cid, int? page)
+        public async Task<ActionResult<IEnumerable<Cliente>>> GetCliente(string? cpf, string? nome, DateTime? dataNascimento, int? sexo, string? endereco, string? estado, string? cidade, int? page)
         {
             IEnumerable<Cliente> clientes = await _context.Cliente.ToListAsync();
 
             if (!String.IsNullOrEmpty(nome))
             {
-                clientes = clientes.Where(c => c.Nome!.Contains(nome));
+                clientes = clientes.Where(c => !String.IsNullOrEmpty(c.Nome)
+                                        && RemoveDiacritics(c.Nome).ContainsCaseInsensitive(RemoveDiacritics(nome)));
             }
             if (!String.IsNullOrEmpty(cpf))
             {
-                clientes = clientes.Where(c => c.CPF!.Contains(cpf));
+                clientes = clientes.Where(c => !String.IsNullOrEmpty(c.CPF)
+                                        && RemoveDiacritics(c.CPF).ContainsCaseInsensitive(RemoveDiacritics(cpf)));
             }
-            if (datanasc.HasValue)
+            if (dataNascimento.HasValue)
             {
-                clientes = clientes.Where(c => c.DataNascimento == datanasc.Value.Date);
+                clientes = clientes.Where(c => c.DataNascimento == dataNascimento.Value.Date);
             }
             if (sexo.HasValue)
             {
                 clientes = clientes.Where(c => c.sexo == sexo);
             }
-            if (!String.IsNullOrEmpty(end))
+            if (!String.IsNullOrEmpty(endereco))
             {
                 clientes = clientes.Where(c => !String.IsNullOrEmpty(c.Endereco)
-                                        && RemoveDiacritics(c.Endereco).Contains(RemoveDiacritics(end)));
+                                        && RemoveDiacritics(c.Endereco).ContainsCaseInsensitive(RemoveDiacritics(endereco)));
             }
-            if (!String.IsNullOrEmpty(uf))
+            if (!String.IsNullOrEmpty(estado))
             {
                 clientes = clientes.Where(c => !String.IsNullOrEmpty(c.Estado) 
-                                        && RemoveDiacritics(c.Estado).Contains(RemoveDiacritics(uf)));
+                                        && RemoveDiacritics(c.Estado).ContainsCaseInsensitive(RemoveDiacritics(estado)));
             }
-            if (!String.IsNullOrEmpty(cid))
+            if (!String.IsNullOrEmpty(cidade))
             {
                 clientes = clientes.Where(c => !String.IsNullOrEmpty(c.Cidade)
-                                        && RemoveDiacritics(c.Cidade).Contains(RemoveDiacritics(cid)));
+                                        && RemoveDiacritics(c.Cidade).ContainsCaseInsensitive(RemoveDiacritics(cidade)));
             }
 
             var pageNumber = page ?? 1;

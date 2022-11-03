@@ -12,8 +12,30 @@ export class ClienteService {
 
   constructor(private http: HttpClient) { }
 
-  public getClientes() : Observable<Cliente[]> {
-    return this.http.get<Cliente[]>(`${environment.apiUrl}/${this.url}`);
+  public getClientes(cliente: Cliente = new Cliente()) : Observable<Cliente[]> {
+    let queryString = "";
+    let queryTarget = {
+      cpf: "",
+      nome: "",
+      dataNascimento: "",
+      sexo: "",
+      endereco: "",
+      estado: "",
+      cidade: "",
+    };
+    queryTarget.cpf = cliente.cpf ? cliente.cpf : "";
+    queryTarget.nome = cliente.nome ? cliente.nome : "";
+    queryTarget.dataNascimento = cliente.dataNascimento ? cliente.dataNascimento.toDateString() : "";
+    queryTarget.sexo = cliente.sexo ? cliente.sexo.toString() : "";
+    queryTarget.endereco = cliente.endereco ? cliente.endereco : "";
+    queryTarget.estado = cliente.estado ? cliente.estado : "";
+    queryTarget.cidade = cliente.cidade ? cliente.cidade : "";
+    
+    if(Object.keys(queryTarget).length){
+      queryString = '?' + new URLSearchParams(queryTarget).toString();
+    }
+    
+    return this.http.get<Cliente[]>(`${environment.apiUrl}/${this.url}${queryString}`);
   }
 
   public updateClientes(cliente: Cliente) : Observable<Cliente[]> {

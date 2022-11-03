@@ -1,40 +1,38 @@
-<mat-card *ngIf="cliente" class="custom">
-    <mat-card-title *ngIf="!cliente.id">Cadastrar Cliente</mat-card-title>
-    <mat-card-title *ngIf="cliente.id">Editar Cliente</mat-card-title>
-    <form class="example-form">
-        <mat-form-field class="example-full-width" appearance="fill">
+<mat-card class="custom">
+    <mat-card-title>Pesquisar Cliente</mat-card-title>
+
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+        <td><mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Nome</mat-label>
             <input matInput [(ngModel)]="cliente.nome" name="Nome">
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width" appearance="fill">
+        </mat-form-field></td>
+        <td><mat-form-field class="example-full-width" appearance="fill">
             <mat-label>CPF</mat-label>
-            <input mask="000.000.000-00" matInput [(ngModel)]="cliente.cpf" name="Cpf">
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width" appearance="fill">
+            <input mask="000.000.000-00" matInput [(ngModel)]="cliente.cpf" name="CPF">
+        </mat-form-field></td>
+        <td><mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Data Nascimento</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="cliente.dataNascimento" name="datanasc">
+            <input matInput [matDatepicker]="picker" [(ngModel)]="cliente.dataNascimento" name="dataNascimento">
             <mat-hint>DD/MM/YYYY</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Sexo</mat-label>
-        <mat-select [(ngModel)]="cliente.sexo" name="sexo" (ngModelChange)="cliente.sexo = $event ? $event : null">
-            <mat-option [value]="">Sexo</mat-option>
-            <mat-option [value]="1">M</mat-option>
-            <mat-option [value]="2">F</mat-option>
-        </mat-select>
-        </mat-form-field>
-        
-        <mat-form-field class="example-full-width" appearance="fill">
+        </mat-form-field></td>
+        <td><mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Sexo</mat-label>
+            <mat-select [(ngModel)]="cliente.sexo" name="sexo" (ngModelChange)="cliente.sexo = $event ? $event : null">
+                <mat-option [value]="">Sexo</mat-option>
+                <mat-option [value]="1">M</mat-option>
+                <mat-option [value]="2">F</mat-option>
+            </mat-select>
+            </mat-form-field></td>
+        </tr>
+        <tr>
+        <td><mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Endereço</mat-label>
-            <input matInput [(ngModel)]="cliente.endereco" name="end">
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width" appearance="fill">
+            <input matInput [(ngModel)]="cliente.endereco" name="Endereco">
+        </mat-form-field></td>
+        <td><mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Estado</mat-label>
             <mat-select [(ngModel)]="cliente.estado" name="uf" (ngModelChange)="cliente.estado = $event ? $event : null">
                 <mat-option [value]="">Estado</mat-option>
@@ -66,17 +64,16 @@
                 <mat-option [value]="'SE'">SE</mat-option>
                 <mat-option [value]="'TO'">TO</mat-option>
             </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width" appearance="fill">
+        </mat-form-field></td>
+        <td><mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Cidade</mat-label>
-            <input matInput [(ngModel)]="cliente.cidade" name="cid">
-        </mat-form-field>
-
-        <div class="button-row">
-            <button mat-flat-button color="primary" (click)="createCliente(cliente)" *ngIf="!cliente.id">Cadastrar</button>
-            <button mat-flat-button color="primary" (click)="updateCliente(cliente)" *ngIf="cliente.id">Salvar</button>
-            <button mat-flat-button class="custom" (click)="closeEditScreen()">Cancelar</button>
-        </div>
-    </form>
+            <input matInput [(ngModel)]="cliente.cidade" name="Cidade">
+        </mat-form-field></td>
+        <td>
+            <div class="button-row" style="display: flex; justify-content: flex-end">
+                <button mat-flat-button color="primary" (click)="filterClients(cliente)" >Pesquisar</button>
+                <button mat-flat-button class="custom" (click)="cleanClientFilters()" >Limpar</button>
+            </div>
+        </td>
+        </tr></table>
 </mat-card>

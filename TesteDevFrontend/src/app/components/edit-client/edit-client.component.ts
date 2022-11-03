@@ -20,7 +20,7 @@ export class EditClientComponent implements OnInit {
   }
 
   createCliente(cliente:Cliente){
-    if(cliente.dataNascimento == ""){ cliente.dataNascimento = null}
+    //if(cliente.dataNascimento){ cliente.dataNascimento = null}
     this.clienteService
       .createClientes(cliente)
       .subscribe((clientes) => this.clienteCreated.emit(clientes)) 
